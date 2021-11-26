@@ -12,6 +12,7 @@ django = "*"
 pillow = "*"
 django-seed = "*"
 faker = "==2.0.5"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
