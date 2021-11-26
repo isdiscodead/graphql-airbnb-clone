@@ -29,8 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
-
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -46,7 +44,9 @@ PROJECT_APPS = [
     "rooms.apps.RoomsConfig",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "graphene_django",
+]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
