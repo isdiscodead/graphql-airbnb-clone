@@ -1,14 +1,12 @@
 import graphene
+from graphene_django import DjangoObjectType
 
 from rooms.models import Room
 
 
-class RoomType(graphene.ObjectType):
-    # models.py에 있는 내용 graphene으로 변경
-    name = graphene.String()
-    address = graphene.String()
-    price = graphene.Int()
-    beds = graphene.Int()
+class RoomType(DjangoObjectType):
+    class Meta:
+        model = Room
 
 
 class Query(graphene.ObjectType):
