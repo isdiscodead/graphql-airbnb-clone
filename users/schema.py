@@ -12,4 +12,5 @@ class Query(object):
 class Mutation(object):
     # mutation을 받아서 필드 형태로 변환
     create_account = CreateAccountMutations.Field()
+    login = LoginMutation.Field()
 

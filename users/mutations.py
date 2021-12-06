@@ -1,4 +1,7 @@
 import graphene
+import jwt
+from django.contrib.auth import authenticate
+from django.conf import settings
 
 from users.models import User
 
@@ -25,3 +28,23 @@ class CreateAccountMutations(graphene.Mutation):
                 return CreateAccountMutations(ok=True)
             except Exception:
                 return CreateAccountMutations(ok=False, error="Can't create user.")
+
+
+class LoginMutation(graphene.Mutation):
+
+    class Arguments:
+        email = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    token = graphene.String()
+    pk = graphene.Int()
+    error = graphene.String()
+
+    def mutate(self, info, email, password):
+        user = authenticate(username=email, password=password)
+        if user:
+            token = jwt.encode({'pk': user.pk}, settings.SECRET_KEY, algorithm='HS256')
+            # 현 상태의 token은 byte 형태이므로 string으로 바꿔줘야 함 -> decode()
+            return LoginMutation(token=token.decode("utf-8"), pk=user.pk)
+        else:
+            return LoginMutation(error="Wrong username/password")
