@@ -14,8 +14,8 @@ class CreateAccountMutations(graphene.Mutation):
         email = graphene.String(required=True)
         password = graphene.String(required=True)
 
-        ok = graphene.Boolean()
-        error = graphene.String()
+    ok = graphene.Boolean()
+    error = graphene.String()
 
     # mutate()는 필수, 위에서 정의한 인자도 필요함 -> *args, **kwargs 사용도 가능
     def mutate(self, info, email, password, first_name=None, last_name=None):
