@@ -36,6 +36,7 @@ class LoginMutation(graphene.Mutation):
         email = graphene.String(required=True)
         password = graphene.String(required=True)
 
+    # 여기 들여쓰기 잘못되면 오류 발생!!
     token = graphene.String()
     pk = graphene.Int()
     error = graphene.String()
@@ -44,7 +45,8 @@ class LoginMutation(graphene.Mutation):
         user = authenticate(username=email, password=password)
         if user:
             token = jwt.encode({'pk': user.pk}, settings.SECRET_KEY, algorithm='HS256')
-            # 현 상태의 token은 byte 형태이므로 string으로 바꿔줘야 함 -> decode()
-            return LoginMutation(token=token.decode("utf-8"), pk=user.pk)
+            # 현 상태의 token은 byte 형태이므로 string으로 바꿔줘야 함 -> token.decode("utf-8)
+            # 패치가 되었는지 그냥 token으로 동작하네 ...
+            return LoginMutation(token=token, pk=user.pk)
         else:
             return LoginMutation(error="Wrong username/password")

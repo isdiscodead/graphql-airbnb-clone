@@ -5,6 +5,9 @@ from rooms.models import Room
 
 
 class RoomType(DjangoObjectType):
+
+    user = graphene.Field("users.schema.UserType")
+
     class Meta:
         model = Room
 
