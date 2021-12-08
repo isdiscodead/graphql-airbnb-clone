@@ -13,7 +13,6 @@ def resolve_rooms(self, info, page=1):
     total = Room.objects.count()
     return RoomListResponse(arr=rooms, total=total)
 
-
 def resolve_room(self, info, id):
     try:
         return Room.objects.get(id=id)
