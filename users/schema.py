@@ -17,4 +17,5 @@ class Mutation(object):
     create_account = CreateAccountMutations.Field()
     login = LoginMutation.Field()
     toggle_favs = ToggleMutation.Field()
+    edit_profile = EditProfileMutation.Field()
 
